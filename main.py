@@ -90,7 +90,6 @@ class TaskManagerGUI:
             task_with_time = f'{task} (Due: {due_date.strftime("%Y-%m-%d %H:%M")})'
             self.tasks.append((task, due_date))
             self.completed_task_listbox.insert(tk.END, task_with_time)
-            task, due_date = self.tasks.pop(selected_index[0])
             self.task_listbox.delete(selected_index)
             self.completed_task_listbox.itemconfig(selected_index, {'bg':'green'})
 
