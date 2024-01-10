@@ -74,15 +74,13 @@ class TaskManagerGUI:
         self.current_time_label.config(text=f"Current Time: {current_time_str}")
         for task, due_date in self.tasks:
             if due_date < current_time:
-                task_with_time = f'{task} (Due: {due_date.strftime("%Y-%m-%d %H:%M")})'
                 index = self.tasks.index((task, due_date))
                 self.task_listbox.itemconfig(index, {'bg': 'red'})
             else:
-                task_with_time = f'{task} (Due: {due_date.strftime("%Y-%m-%d %H:%M")})'
                 index = self.tasks.index((task, due_date))
                 self.task_listbox.itemconfig(index, {'bg': 'white'})
 
-        self.master.after(1000, self.update_time)
+        self.master.after(1000, self.updateTime)
 
     def markAsCompleted(self):
         selected_index = self.task_listbox.curselection()
