@@ -1,7 +1,9 @@
 import tkinter as tk
 from datetime import datetime
+
+
 class TaskManagerGUI:
-    def __init__(self,master):
+    def __init__(self, master):
         self.master = master
         self.master.title('Task Manager')
 
@@ -13,35 +15,34 @@ class TaskManagerGUI:
         self.current_time_label = tk.Label(self.time_frame, text="", font=("Times New Roman", 12))
         self.current_time_label.pack()
 
-        self.update_time()
+        self.updateTime()
 
         self.task_entry = tk.Entry(self.master, width=80)
         self.task_entry.pack(pady=10)
 
-        self.due_date_entry = tk.Entry(self.master, width = 15)
+        self.due_date_entry = tk.Entry(self.master, width=15)
         self.due_date_entry.pack(pady=5)
-        self.due_date_entry.insert(0,'YYYY-MM-DD HH:MM')
+        self.due_date_entry.insert(0, 'YYYY-MM-DD HH:MM')
 
-        self.task_entry.bind("<FocusIn>", self.clear_placeholder)
-        self.due_date_entry.bind("<FocusIn>", self.clear_placeholder)
+        self.task_entry.bind("<FocusIn>", self.clearPlaceholder)
+        self.due_date_entry.bind("<FocusIn>", self.clearPlaceholder)
 
-        button = tk.Button(self.master,text = 'Add task',width = 25, command = self.addTask)
+        button = tk.Button(self.master, text='Add task', width=25, command=self.addTask)
         button.pack()
-        button = tk.Button(self.master,text = 'Mark as completed',width= 25, command = self.markAsCompleted)
+        button = tk.Button(self.master, text='Mark as completed', width=25, command=self.markAsCompleted)
         button.pack()
-        button = tk.Button(self.master,text = 'Delete task',width = 25, command = self.deleteTask)
+        button = tk.Button(self.master, text='Delete task', width=25, command=self.deleteTask)
         button.pack()
 
         tk.Label(self.master, text="Tasks:").pack()
-        self.task_listbox = tk.Listbox(self.master, width=50, selectmode = tk.SINGLE)
-        self.task_listbox.pack(pady = 10)
+        self.task_listbox = tk.Listbox(self.master, width=50, selectmode=tk.SINGLE)
+        self.task_listbox.pack(pady=10)
 
         tk.Label(self.master, text="Completed Tasks:").pack()
-        self.completed_task_listbox = tk.Listbox(self.master,width=50,selectmode = tk.SINGLE)
-        self.completed_task_listbox.pack(pady = 10)
+        self.completed_task_listbox = tk.Listbox(self.master, width=50, selectmode=tk.SINGLE)
+        self.completed_task_listbox.pack(pady=10)
 
-
-    def clear_placeholder(self, event):
+    def clearPlaceholder(self, event):
         if event.widget.get() in ('Task', 'YYYY-MM-DD HH:MM'):
             event.widget.delete(0, tk.END)
 
@@ -67,7 +68,7 @@ class TaskManagerGUI:
             self.task_listbox.delete(selected_index)
             print(f'Task "{task}" (Due: {due_date.strftime("%Y-%m-%d %H:%M")}) removed.')
 
-    def update_time(self):
+    def updateTime(self):
         current_time = datetime.now()
         current_time_str = current_time.strftime("%Y-%m-%d %H:%M:%S")
         self.current_time_label.config(text=f"Current Time: {current_time_str}")
@@ -91,7 +92,8 @@ class TaskManagerGUI:
             self.tasks.append((task, due_date))
             self.completed_task_listbox.insert(tk.END, task_with_time)
             self.task_listbox.delete(selected_index)
-            self.completed_task_listbox.itemconfig(selected_index, {'bg':'green'})
+            self.completed_task_listbox.itemconfig(selected_index, {'bg': 'green'})
+
 
 if __name__ == "__main__":
     root = tk.Tk()
