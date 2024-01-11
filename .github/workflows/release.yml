@@ -9,7 +9,7 @@ name: Upload Release Asset
 jobs:
   build:
     name: Upload Release Asset
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,7 +23,6 @@ jobs:
           pip install pyinstaller
       - name: Build executable # This would actually build your project, using zip for an example artifact
         run: |
-          pip install pyinstaller
           pyinstaller --onefile main.py
       - name: Create Release
         id: create_release
