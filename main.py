@@ -45,6 +45,7 @@ class TaskManagerGUI:
     def clearPlaceholder(self, event):
         if event.widget.get() in ('Task', 'YYYY-MM-DD HH:MM'):
             event.widget.delete(0, tk.END)
+        pass
 
     def addTask(self):
         task = self.task_entry.get()
@@ -60,6 +61,7 @@ class TaskManagerGUI:
                 self.due_date_entry.delete(0, tk.END)
             except ValueError:
                 print('Invalid date format. Please use YYYY-MM-DD HH:MM.')
+        pass
 
     def deleteTask(self):
         selected_index = self.task_listbox.curselection()
@@ -67,6 +69,7 @@ class TaskManagerGUI:
             task, due_date = self.tasks.pop(selected_index[0])
             self.task_listbox.delete(selected_index)
             print(f'Task "{task}" (Due: {due_date.strftime("%Y-%m-%d %H:%M")}) removed.')
+        pass
 
     def updateTime(self):
         current_time = datetime.now()
@@ -75,10 +78,10 @@ class TaskManagerGUI:
         for task, due_date in self.tasks:
             if due_date < current_time:
                 index = self.tasks.index((task, due_date))
+                task_with_time = f'{task} (Due: {due_date.strftime("%Y-%m-%d %H:%M")})'
                 self.task_listbox.itemconfig(index, {'bg': 'red'})
             else:
-                index = self.tasks.index((task, due_date))
-                self.task_listbox.itemconfig(index, {'bg': 'white'})
+                pass
 
         self.master.after(1000, self.updateTime)
 
@@ -91,6 +94,7 @@ class TaskManagerGUI:
             self.completed_task_listbox.insert(tk.END, task_with_time)
             self.task_listbox.delete(selected_index)
             self.completed_task_listbox.itemconfig(selected_index, {'bg': 'green'})
+        pass
 
 
 if __name__ == "__main__":
