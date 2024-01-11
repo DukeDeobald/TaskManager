@@ -78,7 +78,6 @@ class TaskManagerGUI:
         for task, due_date in self.tasks:
             if due_date < current_time:
                 index = self.tasks.index((task, due_date))
-                task_with_time = f'{task} (Due: {due_date.strftime("%Y-%m-%d %H:%M")})'
                 self.task_listbox.itemconfig(index, {'bg': 'red'})
             else:
                 pass
