@@ -12,41 +12,21 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [macos-latest]
     steps:
-      - name: Build app (macos)
-        if: matrix.os == macos-latest
-        uses: | 
-          actions/checkout@v3
-          actions/setup-python@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
         with:
           python-version: 3.11
-          run: |
-            python -m pip install --upgrade pip
-            pip install pyinstaller 
-            pyinstaller --onefile main.py
-      - name: Build app (ubuntu)
-        if: matrix.os == ubuntu-latest
-        uses: |
-          actions/checkout@v3
-          actions/setup-python@v3
-        with:
-          python-version: 3.11
-          run: |
-            python -m pip install --upgrade pip
-            pip install pyinstaller 
-            pyinstaller --onefile main.py
-      - name: Build app (windows)
-        if: matrix.os == windows-latest
-        uses: |
-          actions/checkout@v3
-          actions/setup-python@v3
-        with:
-          python-version: 3.11
-          run: |
-            python -m pip install --upgrade pip
-            pip install pyinstaller 
-            pyinstaller --onefile main.py
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+      - name: Build executable # This would actually build your project, using zip for an example artifact
+        run: |
+          pyinstaller --onefile main.py
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
