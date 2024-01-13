@@ -25,7 +25,8 @@ jobs:
       - name: Build executable # This would actually build your project, using zip for an example artifact
         run: |
           pyinstaller --onefile main.py
-      - name: Create Release
+      - name: Create Release for Mac
+        if: matrix.os == 'macos-latest'
         id: create_release
         uses: actions/create-release@v1
         env:
