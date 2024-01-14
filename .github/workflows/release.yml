@@ -36,13 +36,19 @@ jobs:
           pip install pyinstaller
           pyinstaller --onefile main.py
 
+      - name: Create Release Directory
+        run: mkdir -p release-assets
+
+      - name: Move Files to Release Directory
+        run: mv ./dist/* release-assets/
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: release-${{ github.sha }}-${{ github.run_number }}
+          tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
@@ -50,17 +56,18 @@ jobs:
   publish:
     name: Publish Release Assets
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
           name: release-assets
-          path: ./dist
-      - name: Publish for ${{ matrix.os }}
+          path: ./release-assets
+
+      - name: Publish Release Assets
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./dist/main*
+          file: ./release-assets/*
           asset_name: main
-          tag: ${{ github.ref }}
+          tag: release-${{ github.sha }}-${{ github.run_number }}
