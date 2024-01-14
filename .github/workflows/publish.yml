@@ -12,15 +12,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
-            artifact_name: LinuxLauncher
-            asset_name: linuxlauncher-linux-amd64
           - os: windows-latest
-            artifact_name: WindowsLauncher.exe
-            asset_name: windowslauncher-windows-amd64
+            artifact_name: main.exe
+            asset_name: main.exe
           - os: macos-latest
-            artifact_name: MacLauncher
-            asset_name: maclauncher-macos-amd64
+            artifact_name: main
+            asset_name: main
     steps:
       - uses: actions/checkout@v3
       - name: Upload binaries to release
