@@ -58,10 +58,9 @@ jobs:
           name: release-assets
           path: ./dist
       - name: Publish for ${{ matrix.os }}
-        run:
-          uses: svenstaro/upload-release-action@v2
-          with:
-            repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: ./dist/main*
-            asset_name: main
-            tag: ${{ github.ref }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./dist/main*
+          asset_name: main
+          tag: ${{ github.ref }}
