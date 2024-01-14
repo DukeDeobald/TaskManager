@@ -47,22 +47,21 @@ jobs:
           draft: false
           prerelease: false
 
+  publish:
+    name: Publish Release Assets
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: release-assets
+          path: ./dist
       - name: Publish for ${{ matrix.os }}
-        runs-on: ${{ matrix.os }}
-        strategy:
-          matrix:
-            include:
-              - os: windows-latest
-                artifact_name: main.exe
-                asset_name: main.exe
-              - os: macos-latest
-                artifact_name: main
-                asset_name: main
-        steps:
-          - name: Upload binaries to release
-            uses: svenstaro/upload-release-action@v2
-            with:
-              repo_token: ${{ secrets.GITHUB_TOKEN }}
-              file: ./dist/${{ matrix.artifact_name }}
-              asset_name: ${{ matrix.asset_name }}
-              tag: ${{ github.ref }}
+        run:
+          uses: svenstaro/upload-release-action@v2
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            file: ./dist/main*
+            asset_name: main
+            tag: ${{ github.ref }}
