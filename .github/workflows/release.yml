@@ -56,7 +56,7 @@ jobs:
   publish:
     name: Publish Release Assets
     needs: build
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
