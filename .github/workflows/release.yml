@@ -60,7 +60,6 @@ jobs:
               - os: macos-latest
                 artifact_name: MacLauncher
                 asset_name: maclauncher-macos-amd64
-
         steps:
           - uses: actions/checkout@v3
           - name: Build
