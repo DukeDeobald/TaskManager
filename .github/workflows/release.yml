@@ -51,7 +51,7 @@ jobs:
           asset_path: ./dist/main
           asset_name: main
           asset_content_type: application/octet-stream
-        elif: matrix.os == 'windows-latest'
+        if: matrix.os == 'windows-latest'
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`
           asset_path: ./dist/main.exe
