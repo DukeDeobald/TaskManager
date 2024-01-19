@@ -5,6 +5,7 @@ My first project - a Task Manager with basic functionality. In current version i
 2. Delete task from the list
 3. Mark task as completed (Moves it to "completed tasks" and colours it green)
 4. If due time for the task expired it will be coloured red.
+5. Starting with v0.1924 tasks are being saved to database, but completed tasks will be refreshed each time you start an application.
 
    There are some known issues related to the task with very long name, errors not showing up, tasks not being saved after closing the application and the need to input time in right format all by yourself.
    
@@ -12,10 +13,8 @@ My first project - a Task Manager with basic functionality. In current version i
 
 # Installation
 
-1. Clone a repo ``git clone https://github.com/DukeDeobald/TaskManager``
+For Windows:
 
-2. Create Python virtual environment ``python3 -m venv .venv``
-
-3. Activate virtual env ``source .venv/bin/activate``
-
-4. Run it using ``python3 main.py``
+1. Download ``main.exe`` file
+2. Open it
+3. Enjoy
