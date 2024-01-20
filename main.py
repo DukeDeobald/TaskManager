@@ -19,14 +19,6 @@ class TaskManagerGUI:
             )
         ''')
 
-        self.cursor.execute('''
-            CREATE TABLE IF NOT EXISTS completedTasks (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                task TEXT NOT NULL,
-                due_date TEXT NOT NULL
-            )   
-        ''')
-
         self.connection.commit()
 
         self.tasks = []
@@ -129,8 +121,6 @@ class TaskManagerGUI:
 
     def remove_task_from_db(self, task, due_date):
         self.cursor.execute("DELETE FROM tasks WHERE task = ? AND due_date = ?", (task, due_date))
-        self.connection.commit()
-        self.cursor.execute("DELETE FROM completedTasks WHERE task = ? AND due_date = ?", (task, due_date))
         self.connection.commit()
 
     def close_db(self):
