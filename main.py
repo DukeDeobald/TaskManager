@@ -146,6 +146,7 @@ class TaskManagerGUI:
             self.completed_task_listbox.insert(tk.END, task_with_time)
             self.task_listbox.delete(selected_index)
             self.completed_task_listbox.itemconfig(selected_index, {'bg': 'green'})
+            self.remove_task_from_db(task, due_date.strftime('%Y-%m-%d %H:%M'))
         pass
 
 
