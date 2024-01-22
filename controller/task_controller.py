@@ -1,6 +1,5 @@
 from view.task_view import TaskView
 from model.task import TaskModel
-import tkinter as tk
 import sqlite3
 
 class TaskController:

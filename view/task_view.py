@@ -1,7 +1,4 @@
 import tkinter as tk
-from model.task import TaskModel
-from model.database import Database as model
-import sqlite3
 from datetime import datetime
 from tkinter import messagebox
 
